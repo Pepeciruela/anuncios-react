@@ -1,10 +1,21 @@
 import classNames from 'classnames'
 
 
-function Header({className}){
+function Header({className, estaRegistrado}){
     return(<header className={classNames('header', className)}>
         <div className='header-logo'></div>
-        <nav className='header-nav'><button className='header-button'></button></nav>
+        <nav className='header-nav'>
+            {estaRegistrado ?
+                <button className='header-button'>
+                    Log out
+                </button>
+                :
+                <button className='header-button'>
+                    Log in
+                </button>
+            }
+            </nav>
+            
     </header>);
 }
 
