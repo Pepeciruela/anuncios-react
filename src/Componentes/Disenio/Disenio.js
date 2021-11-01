@@ -16,4 +16,4 @@ function Disenio({children, title, ...props}){
 
 };
 
-export default Disenio
+export default Disenio;

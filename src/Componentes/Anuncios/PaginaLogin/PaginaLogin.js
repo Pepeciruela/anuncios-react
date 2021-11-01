@@ -19,6 +19,7 @@ function PaginaLogin({onLogin}){
         setCargando(true);
         try{
             await login(value);
+            setCargando(false);
             onLogin();
         } catch (error) {
             setError(error);

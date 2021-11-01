@@ -23,5 +23,9 @@ export const autorizacionHeader = token => {
     cliente.defaults.headers.common['Authorization'] = `Bearer ${token}`
 }
 
+export const borrarAutorizacionHeader = () => {
+    delete cliente.defaults.headers.common['Authorization'];
+}
+
 
 export default cliente;
