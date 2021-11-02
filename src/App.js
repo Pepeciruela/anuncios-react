@@ -4,6 +4,8 @@ import PaginaLogin from './Componentes/Anuncios/PaginaLogin/PaginaLogin';
 import {useState} from 'react';
 import {logout} from './Componentes/Anuncios/PaginaLogin/servicios'
 
+import {ContextoRegistroProvider} from './Componentes/Anuncios/contexto'
+
 function App({estaLogueadoInicio}) {
 
 const[estaRegistrado, setEstaRegistrado] = useState(estaLogueadoInicio);
@@ -15,15 +17,18 @@ const borrarRegistro = () => {
 }
 
   return (
+    <ContextoRegistroProvider value={{estaRegistrado, cambiarRegistro, borrarRegistro}}> 
     <div>
       
       {estaRegistrado ? (
-      <PaginaAnuncios estaRegistrado={estaRegistrado} onLogout={borrarRegistro}/>
+      <PaginaAnuncios/>
       )
       :  
       (<PaginaLogin onLogin = {cambiarRegistro}/>)
       }
     </div>
+
+    </ContextoRegistroProvider> 
   );
 }
 

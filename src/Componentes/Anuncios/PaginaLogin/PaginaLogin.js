@@ -6,6 +6,14 @@ function PaginaLogin({onLogin}){
     const [error, setError] = useState(null);
     const resetearError = () => setError(null);
     const [cargando, setCargando] = useState(false);
+    const [checkbox, setCheckbox] = useState(false);
+
+    const usuarioRecordado = () => {
+        const recuerdame = localStorage.getItem('recuerdame') === 'true';
+        const usuario = recuerdame ? localStorage.getItem('usuario') : '';
+        const password = recuerdame ? localStorage.getItem('password') : '';
+        this.setState({ usuario, password, recuerdame });
+      };
 
     const eventoCambio = evento => {
         setValue(estadoPrevio => ({
@@ -14,19 +22,36 @@ function PaginaLogin({onLogin}){
         }))
     };
 
+    const cambioCheckbox = evento => {
+        setCheckbox(evento.target.checked);
+    };
+    
+
     const controlarSubmit = async evento => {
         evento.preventDefault();
         setCargando(true);
-        try{
-            await login(value);
-            setCargando(false);
-            onLogin();
-        } catch (error) {
-            setError(error);
-        } finally{
-            setCargando(false);
+        if(checkbox === true){
+            localStorage.setItem('recuerdame', true)
+            try{
+                await login(value);
+                localStorage.setItem('email', value.email);
+                localStorage.setItem('password', value.password);
+                setCargando(false);
+                onLogin();
+            } catch (error) {
+                setError(error);
+                setCargando(false);
+            }
+        } else {
+            try{
+                await login(value);
+                setCargando(false);
+                onLogin();
+            } catch (error) {
+                setError(error);
+                setCargando(false);
+            }
         }
-        
     };
 
     return (   
@@ -44,6 +69,10 @@ function PaginaLogin({onLogin}){
         label = 'Password'
         value={value.password}
         onChange={eventoCambio}></input>
+
+        <input type='checkbox'
+        name='checkbox'
+        onChange={cambioCheckbox}></input>
 
         <button 
         type='submit' 
