@@ -8,13 +8,6 @@ function PaginaLogin({onLogin}){
     const [cargando, setCargando] = useState(false);
     const [checkbox, setCheckbox] = useState(false);
 
-    const usuarioRecordado = () => {
-        const recuerdame = localStorage.getItem('recuerdame') === 'true';
-        const usuario = recuerdame ? localStorage.getItem('usuario') : '';
-        const password = recuerdame ? localStorage.getItem('password') : '';
-        this.setState({ usuario, password, recuerdame });
-      };
-
     const eventoCambio = evento => {
         setValue(estadoPrevio => ({
             ...estadoPrevio,
@@ -47,6 +40,8 @@ function PaginaLogin({onLogin}){
                 await login(value);
                 setCargando(false);
                 onLogin();
+                
+
             } catch (error) {
                 setError(error);
                 setCargando(false);
@@ -58,18 +53,20 @@ function PaginaLogin({onLogin}){
     <div className='paginalogin'>
     <h1 className='paginalogin-titulo'> Accede a Nodepop</h1>
     <form onSubmit={controlarSubmit}>
+    <label>Email</label>
         <input type='text' 
         name='email' 
         label='Email'
         value={value.email}
+        autoFocus
         onChange={eventoCambio}></input>
-
+        <label>Password</label>
         <input type='password' 
         name='password'
         label = 'Password'
         value={value.password}
         onChange={eventoCambio}></input>
-
+        <label>Recuerdame</label>
         <input type='checkbox'
         name='checkbox'
         onChange={cambioCheckbox}></input>

@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import classNames from 'classnames'
 import ContextoRegistro from '../Anuncios/contexto';
+import {Link, NavLink} from 'react-router-dom';
 
 
 function Header({className}){
@@ -10,6 +11,7 @@ function Header({className}){
         <div className='header-logo'>
         </div>
         <nav className='header-nav'>
+            <NavLink to='/averts/new'>Nuevo Anuncio</NavLink>
             {estaRegistrado ? (
                 <button className='header-button' onClick={borrarRegistro}>
                     Log out

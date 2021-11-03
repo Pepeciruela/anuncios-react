@@ -1,10 +1,11 @@
 import './App.css'
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import PaginaAnuncios from './Componentes/Anuncios/PaginaAnuncios/PaginaAnuncios'
 import PaginaLogin from './Componentes/Anuncios/PaginaLogin/PaginaLogin';
 import {useState} from 'react';
 import {logout} from './Componentes/Anuncios/PaginaLogin/servicios'
-
 import {ContextoRegistroProvider} from './Componentes/Anuncios/contexto'
+import RutaPrivada from './Componentes/Anuncios/RutaPrivada'
 
 function App({estaLogueadoInicio}) {
 
@@ -17,18 +18,23 @@ const borrarRegistro = () => {
 }
 
   return (
-    <ContextoRegistroProvider value={{estaRegistrado, cambiarRegistro, borrarRegistro}}> 
+    <Router>
+      <ContextoRegistroProvider value={{estaRegistrado, cambiarRegistro, borrarRegistro}}> 
     <div>
-      
-      {estaRegistrado ? (
-      <PaginaAnuncios/>
-      )
-      :  
-      (<PaginaLogin onLogin = {cambiarRegistro}/>)
-      }
+      <Switch>
+        <Route path='/login' component={PaginaLogin}>
+        {estaRegistrado ? <Redirect to='/adverts'/>: <PaginaLogin onLogin={cambiarRegistro}/>}
+        </Route>
+        <RutaPrivada path='/adverts' component={PaginaAnuncios}/>
+        <Route path='/'>
+          <Redirect to='/adverts'></Redirect>
+        </Route>
+      </Switch>
     </div>
 
     </ContextoRegistroProvider> 
+    </Router>
+    
   );
 }
 
