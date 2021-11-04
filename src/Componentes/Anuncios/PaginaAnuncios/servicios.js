@@ -5,7 +5,7 @@ export const traerAnuncios = () => {
     return cliente.get(url);
 }
 
-export const crearAnuncio = (name, sale, price, tags, photo) => {
+export const crearAnuncio = (name, sale, price, tags) => {
     const url = '/api/v1/adverts';
-    return cliente.post(url, name, sale, price, tags, photo);
+    return cliente.post(url, name, sale, price, tags);
 }

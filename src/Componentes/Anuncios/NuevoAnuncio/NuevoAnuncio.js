@@ -4,9 +4,13 @@ import{crearAnuncio} from '../PaginaAnuncios/servicios'
 
 function NuevoAnuncio (){
 
-    const [value, setValue] = useState({name:'', sale:true, price:0, tags:[''] });
-    const [file, setFile] = useState(null)
-
+    const [value, setValue] = useState({
+        name:'', 
+        sale:true, 
+        price:0, 
+        tags:[''],
+        photo:'',
+     });
 
     const cambiarEstado = evento => {
         setValue(estadoPrevio => ({
@@ -15,18 +19,11 @@ function NuevoAnuncio (){
         }))
     }
 
-    const cambiarFile = evento => {
-        evento.preventDefault();
-        setFile(estadoPrevio => ({
-            ...estadoPrevio,
-            [evento.target.name]:evento.target.files[0]
-        }))
-    }
-
     const enviarFormulario = async evento => {
+        const formulario = new FormData(evento.target);
         evento.preventDefault();
         try{
-            await crearAnuncio(value, file)
+            await crearAnuncio(formulario)
         } catch (error){
 
         }
@@ -86,9 +83,7 @@ function NuevoAnuncio (){
                 <label>Fotografía</label>
                 <input type='file' 
                 name='photo' 
-                label='foto'
-                value={file}
-                onChange={cambiarFile}></input>
+                label='foto'></input>
 
                 <button 
                 type='submit'>Crear</button>
