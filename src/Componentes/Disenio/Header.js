@@ -11,7 +11,7 @@ function Header({className}){
         <div className='header-logo'>
         </div>
         <nav className='header-nav'>
-            <NavLink to='/averts/new'>Nuevo Anuncio</NavLink>
+            <NavLink to='/adverts/new'>Nuevo Anuncio</NavLink>
             {estaRegistrado ? (
                 <button className='header-button' onClick={borrarRegistro}>
                     Log out

@@ -2,6 +2,7 @@ import './App.css'
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import PaginaAnuncios from './Componentes/Anuncios/PaginaAnuncios/PaginaAnuncios'
 import PaginaLogin from './Componentes/Anuncios/PaginaLogin/PaginaLogin';
+import NuevoAnuncio from './Componentes/Anuncios/NuevoAnuncio/NuevoAnuncio';
 import {useState} from 'react';
 import {logout} from './Componentes/Anuncios/PaginaLogin/servicios'
 import {ContextoRegistroProvider} from './Componentes/Anuncios/contexto'
@@ -25,10 +26,12 @@ const borrarRegistro = () => {
         <Route path='/login' component={PaginaLogin}>
         {estaRegistrado ? <Redirect to='/adverts'/>: <PaginaLogin onLogin={cambiarRegistro}/>}
         </Route>
+        <RutaPrivada path='/adverts/new' component={NuevoAnuncio}/>
         <RutaPrivada path='/adverts' component={PaginaAnuncios}/>
         <Route path='/'>
           <Redirect to='/adverts'></Redirect>
         </Route>
+        <RutaPrivada path='adverts/:id'></RutaPrivada>
       </Switch>
     </div>
 
