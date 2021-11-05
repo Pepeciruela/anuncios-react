@@ -4,7 +4,7 @@ import './PaginaAnuncios.css';
 import Disenio from '../../Disenio/Disenio';
 import { Link } from 'react-router-dom';
 
-const estaVacio = () => (
+const EstaVacio = () => (
   <div>
     <p> No hay anuncios que mostrar. Crea tu el primero</p>
     <button as={Link} to='adverts/new'>
@@ -24,7 +24,7 @@ function PaginaAnuncios ({estaRegistrado, onLogout}){
       <Disenio title='Últimos anuncios' estaRegistrado = {estaRegistrado} onLogout={onLogout}>
         <div className='paginaAnuncios'>
         Últimos anuncios
-        {anuncios.length ? 
+        {anuncios.length ? (
         <ul>
         {anuncios.map(anuncio =>
         <div key={anuncio.id}>
@@ -38,7 +38,7 @@ function PaginaAnuncios ({estaRegistrado, onLogout}){
         </div>
         )}
     </ul>
-        : <estaVacio/>}
+        ) : ( <EstaVacio/>)}
     </div>
       </Disenio>
     );

@@ -16,3 +16,8 @@ export const traerAnuncio = (id) => {
     return cliente.get(url);
 
 }
+
+export const borrarAd = (id) => {
+    const url = `/api/v1/adverts/${id}`;
+    return cliente.delete(url);
+}
