@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import classNames from 'classnames'
 import ContextoRegistro from '../Anuncios/contexto';
-import {Link, NavLink} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 
 
 function Header({className}){

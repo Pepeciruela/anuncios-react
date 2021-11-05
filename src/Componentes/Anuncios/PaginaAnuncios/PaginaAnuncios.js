@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import {traerAnuncios} from './servicios'
 import './PaginaAnuncios.css';
-import classNames from 'classnames';
 import Disenio from '../../Disenio/Disenio';
 import { Link } from 'react-router-dom';
 
@@ -30,7 +29,7 @@ function PaginaAnuncios ({estaRegistrado, onLogout}){
         {anuncios.map(anuncio =>
         <div key={anuncio.id}>
           <Link to={`/adverts/${anuncio.id}`}>
-            <h2 key={anuncio.id}>{anuncio.name}</h2>
+            <h2>{anuncio.name}</h2>
           </Link>
             <p>Precio: {anuncio.price}</p>
             <p> Tags: {anuncio.tags.map(tag => 

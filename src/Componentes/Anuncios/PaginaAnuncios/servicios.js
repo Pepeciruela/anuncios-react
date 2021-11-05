@@ -9,3 +9,10 @@ export const crearAnuncio = (name, sale, price, tags) => {
     const url = '/api/v1/adverts';
     return cliente.post(url, name, sale, price, tags);
 }
+
+export const traerAnuncio = (id) => {
+
+    const url = `/api/v1/adverts/${id}`;
+    return cliente.get(url);
+
+}
