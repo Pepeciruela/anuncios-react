@@ -21,10 +21,9 @@ function PaginaAnuncios ({estaRegistrado, onLogout}){
   const [tablaAnuncios, setTablaAnuncios] = useState([])
   const [filtroNombre, setFiltroNombre] = useState('');
   const [filtroVenta, setFiltroVenta] = useState('');
-
-    /*useEffect(()=> {
-      traerAnuncios().then(adverts => setAnuncios(adverts));
-    },[]);*/
+  const [filtroTags, setFiltroTags] = useState('');
+  const [filtroPrecioMin, setFiltroPrecioMin] = useState('');
+  const [filtroPrecioMax, setFiltroPrecioMax] = useState('');
 
 
     const busquedaNombre = evento => {
@@ -41,12 +40,33 @@ function PaginaAnuncios ({estaRegistrado, onLogout}){
     setAnuncios(resultadosBusqueda);
     };
 
-    const eventoCambio = evento => {
-      setFiltroVenta(estadoPrevio => ({
-          ...estadoPrevio,
-          [evento.target.name]:evento.target.value
-      }))
-  };
+    const busquedaPrecioMin = evento => {
+      setFiltroPrecioMin(evento.target.value);
+      filtrarPorPrecioMin(evento.target.value);
+    }
+
+    const filtrarPorPrecioMin = (palabra) => {
+      let resultadosBusqueda = tablaAnuncios.filter((elemento) => {
+        if(elemento.price >= palabra && elemento.price <= filtroPrecioMax != 0){
+          return elemento;
+        }
+      })
+    setAnuncios(resultadosBusqueda);
+    }
+
+    const busquedaPrecioMax = evento => {
+      setFiltroPrecioMax(evento.target.value);
+      filtrarPorPrecioMax(evento.target.value);
+    }
+
+    const filtrarPorPrecioMax = (palabra) => {
+      let resultadosBusqueda = tablaAnuncios.filter((elemento) => {
+        if(elemento.price <= palabra){
+          return elemento;
+        }
+      })
+    setAnuncios(resultadosBusqueda);
+    }
 
     const busquedaVenta = evento => {
       setFiltroVenta(evento.target.value)
@@ -56,6 +76,20 @@ function PaginaAnuncios ({estaRegistrado, onLogout}){
     const filtrarPorVenta = (palabra) => {
       let resultadosBusqueda = tablaAnuncios.filter((elemento) => {
         if(elemento.sale.toString().toLowerCase().includes(palabra)){
+          return elemento;
+        }
+      })
+      setAnuncios(resultadosBusqueda);
+    }
+
+    const busquedaTags = evento => {
+      setFiltroTags(evento.target.value)
+      filtroPorTags(evento.target.value)
+    }
+
+    const filtroPorTags = (palabra) => {
+      let resultadosBusqueda = tablaAnuncios.filter((elemento) => {
+        if(elemento.tags.toString().toLowerCase().includes(palabra)){
           return elemento;
         }
       })
@@ -80,6 +114,24 @@ function PaginaAnuncios ({estaRegistrado, onLogout}){
             <input type='text'
             value = {filtroNombre} 
             onChange={busquedaNombre}></input>
+          </div>
+
+          <div className='filtroPrecio'>
+            <label>Filtrar por precio</label>
+            <div>
+            <label>Precio mínimo</label>
+            <input type='number'
+            value = {filtroPrecioMin} 
+            onChange={busquedaPrecioMin}></input>
+          </div>
+          <div>
+            <label>Precio máximo</label>
+            <input type='number'
+            value = {filtroPrecioMax} 
+            onChange={busquedaPrecioMax}></input>
+          </div>
+
+
           </div>
 
           <div className='filtrosVenta'>
@@ -108,6 +160,26 @@ function PaginaAnuncios ({estaRegistrado, onLogout}){
             <label for="compraVenta">Compra y venta</label>
           </div>
           </div>
+          <div className='filtrosVenta'>
+          <label>Tags</label>
+                <select multiple 
+                name='tags' 
+                label='tags'
+                onChange={busquedaTags}>
+                    <option value='ninguno' onChange={busquedaTags}>Ninguna</option>
+                    <option value='lifestyle' onChange={busquedaTags}>Lifestyle</option>
+                    <option value='mobile' onChange={busquedaTags}>Mobile</option>
+                    <option value='motor' onChange={busquedaTags}>Motor</option>
+                    <option value='work' onChange={busquedaTags}>Work</option>
+                </select>
+          </div>
+
+
+
+
+
+
+
 
         </div>
         <div className='paginaAnuncios'>
