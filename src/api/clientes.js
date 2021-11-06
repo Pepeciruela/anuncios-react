@@ -19,6 +19,8 @@ cliente.interceptors.response.use(
 );
 
 
+
+
 export const autorizacionHeader = token => {
     cliente.defaults.headers.common['Authorization'] = `Bearer ${token}`
 }

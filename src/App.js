@@ -28,7 +28,7 @@ const borrarRegistro = () => {
         {estaRegistrado ? <Redirect to='/adverts'/>: <PaginaLogin onLogin={cambiarRegistro}/>}
         </Route>
         <RutaPrivada exact path='/adverts/new' component={NuevoAnuncio}/>
-        <RutaPrivada exact path='/adverts/:id' component={PaginaAnuncio}></RutaPrivada>
+        <RutaPrivada path='/adverts/:id' component={PaginaAnuncio}></RutaPrivada>
         <RutaPrivada exact path='/adverts' component={PaginaAnuncios}/>
         <RutaPrivada exact path='/'>
           <Redirect to='/adverts'></Redirect>

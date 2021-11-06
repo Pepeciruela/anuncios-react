@@ -1,6 +1,7 @@
 import Disenio from '../../Disenio/Disenio';
 import { useState } from 'react';
 import{crearAnuncio} from '../PaginaAnuncios/servicios'
+import {useHistory} from 'react-router-dom'
 
 function NuevoAnuncio (){
 
@@ -10,7 +11,11 @@ function NuevoAnuncio (){
         price:0, 
         tags:[''],
         photo:'',
-     });
+    });
+
+    const[error, setError] = useState('');
+    const[anuncioCreado, setAnuncioCreado] = useState('');
+    const history = useHistory();
 
     const cambiarEstado = evento => {
         setValue(estadoPrevio => ({
@@ -23,13 +28,12 @@ function NuevoAnuncio (){
         const formulario = new FormData(evento.target);
         evento.preventDefault();
         try{
-            await crearAnuncio(formulario)
+            const nuevoAnuncio = await crearAnuncio(formulario);
+            setAnuncioCreado(nuevoAnuncio.id)
+            return history.push(`/adverts/${anuncioCreado}`);
         } catch (error){
-
+            setError(error)
         }
-        
-
-
     }
 
     return(

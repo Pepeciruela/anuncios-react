@@ -12,6 +12,7 @@ function Header({className}){
         </div>
         <nav className='header-nav'>
             <NavLink to='/adverts/new'>Nuevo Anuncio</NavLink>
+            <NavLink to='/adverts'>Inicio</NavLink>
             {estaRegistrado ? (
                 <button className='header-button' onClick={borrarRegistro}>
                     Log out

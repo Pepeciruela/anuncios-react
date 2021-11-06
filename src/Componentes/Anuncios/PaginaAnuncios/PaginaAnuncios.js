@@ -7,21 +7,34 @@ import { Link } from 'react-router-dom';
 const EstaVacio = () => (
   <div>
     <p> No hay anuncios que mostrar. Crea tu el primero</p>
-    <button as={Link} to='adverts/new'>
+    <Link to='adverts/new'>
+    <button>
       Nuevo anuncio
     </button>
+    </Link>
   </div>
 );
 
 function PaginaAnuncios ({estaRegistrado, onLogout}){
   const [anuncios, setAnuncios] = useState([]);
+  const [tablaAnuncios, setTablaAnuncios] = useState([])
+  const [filtroNombre, setFiltroNombre] = useState('');
 
     useEffect(()=> {
       traerAnuncios().then(adverts => setAnuncios(adverts));
     },[]);
     
+    
     return (
       <Disenio title='Últimos anuncios' estaRegistrado = {estaRegistrado} onLogout={onLogout}>
+        <div className='filtrosBusqueda'>
+          <div className='filtroNombre'>
+            <label>Filtrar por nombre</label>
+            <input type='text'
+            value = {filtroNombre} 
+            onChange={(evento) => setFiltroNombre(evento.target.value)}></input>
+          </div>
+        </div>
         <div className='paginaAnuncios'>
         Últimos anuncios
         {anuncios.length ? (

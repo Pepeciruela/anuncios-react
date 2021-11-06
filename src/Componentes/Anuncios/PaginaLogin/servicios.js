@@ -8,6 +8,12 @@ export const login = credenciales => {
     });
 };
 
+export const loginTemporal = credenciales => {
+    return cliente.post('/api/auth/login', credenciales).then(({accessToken}) => {
+        autorizacionHeader(accessToken);
+    });
+};
+
 export const logout = () => Promise.resolve().then(() => {
     borrarAutorizacionHeader();
     storage.remove('auth');

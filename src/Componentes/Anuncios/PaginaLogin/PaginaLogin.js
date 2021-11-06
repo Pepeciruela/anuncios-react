@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import {login} from './servicios'
+import {login, loginTemporal} from './servicios'
 
 function PaginaLogin({onLogin}){
     const [value, setValue] = useState({email:'', password:''});
@@ -27,8 +27,6 @@ function PaginaLogin({onLogin}){
             localStorage.setItem('recuerdame', true)
             try{
                 await login(value);
-                localStorage.setItem('email', value.email);
-                localStorage.setItem('password', value.password);
                 setCargando(false);
                 onLogin();
             } catch (error) {
@@ -37,7 +35,7 @@ function PaginaLogin({onLogin}){
             }
         } else {
             try{
-                await login(value);
+                await loginTemporal(value);
                 setCargando(false);
                 onLogin();
                 
