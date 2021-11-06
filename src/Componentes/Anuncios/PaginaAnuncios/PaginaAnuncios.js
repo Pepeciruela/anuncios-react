@@ -20,10 +20,35 @@ function PaginaAnuncios ({estaRegistrado, onLogout}){
   const [tablaAnuncios, setTablaAnuncios] = useState([])
   const [filtroNombre, setFiltroNombre] = useState('');
 
-    useEffect(()=> {
+    /*useEffect(()=> {
       traerAnuncios().then(adverts => setAnuncios(adverts));
-    },[]);
+    },[]);*/
+
+
+    const busquedaNombre = evento => {
+      setFiltroNombre(evento.target.value);
+      filtrarPorNombre(evento.target.value);
+    }
+
+    const filtrarPorNombre = (palabra) => {
+      let resultadosBusqueda = tablaAnuncios.filter((elemento) => {
+        if(elemento.name.toString().toLowerCase().includes(palabra.toLowerCase())){
+          return elemento;
+        }
+      })
+    setAnuncios(resultadosBusqueda);
+    };
+
     
+    useEffect(()=> {
+      traerAnuncios().then( response => {
+        setAnuncios(response);
+        setTablaAnuncios(response);
+      }).catch(error => {
+        console.log(error)
+      })
+    },[]);
+
     
     return (
       <Disenio title='Últimos anuncios' estaRegistrado = {estaRegistrado} onLogout={onLogout}>
@@ -32,7 +57,7 @@ function PaginaAnuncios ({estaRegistrado, onLogout}){
             <label>Filtrar por nombre</label>
             <input type='text'
             value = {filtroNombre} 
-            onChange={(evento) => setFiltroNombre(evento.target.value)}></input>
+            onChange={busquedaNombre}></input>
           </div>
         </div>
         <div className='paginaAnuncios'>
