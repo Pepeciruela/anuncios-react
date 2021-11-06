@@ -17,8 +17,10 @@ const EstaVacio = () => (
 
 function PaginaAnuncios ({estaRegistrado, onLogout}){
   const [anuncios, setAnuncios] = useState([]);
+  const [error, setError] = useState(null);
   const [tablaAnuncios, setTablaAnuncios] = useState([])
   const [filtroNombre, setFiltroNombre] = useState('');
+  const [filtroVenta, setFiltroVenta] = useState('');
 
     /*useEffect(()=> {
       traerAnuncios().then(adverts => setAnuncios(adverts));
@@ -39,7 +41,27 @@ function PaginaAnuncios ({estaRegistrado, onLogout}){
     setAnuncios(resultadosBusqueda);
     };
 
-    
+    const eventoCambio = evento => {
+      setFiltroVenta(estadoPrevio => ({
+          ...estadoPrevio,
+          [evento.target.name]:evento.target.value
+      }))
+  };
+
+    const busquedaVenta = evento => {
+      setFiltroVenta(evento.target.value)
+      filtrarPorVenta(evento.target.value);
+    }
+
+    const filtrarPorVenta = (palabra) => {
+      let resultadosBusqueda = tablaAnuncios.filter((elemento) => {
+        if(elemento.sale.toString().toLowerCase().includes(palabra)){
+          return elemento;
+        }
+      })
+      setAnuncios(resultadosBusqueda);
+    }
+
     useEffect(()=> {
       traerAnuncios().then( response => {
         setAnuncios(response);
@@ -59,6 +81,34 @@ function PaginaAnuncios ({estaRegistrado, onLogout}){
             value = {filtroNombre} 
             onChange={busquedaNombre}></input>
           </div>
+
+          <div className='filtrosVenta'>
+          <div>
+            <input type="radio" 
+            id="compra" 
+            value="false" 
+            name='drone'
+            onChange={busquedaVenta}/>
+            <label for="compra">Compra</label>
+          </div>
+          <div>
+            <input type="radio" 
+            id="venta"  
+            name='drone' 
+            value="true"
+            onChange={busquedaVenta}/>
+            <label for="venta">Venta</label>
+          </div>
+          <div>
+            <input type="radio" 
+            id="ambos" 
+            name='drone' 
+            value=""
+            onChange={busquedaVenta}/>
+            <label for="compraVenta">Compra y venta</label>
+          </div>
+          </div>
+
         </div>
         <div className='paginaAnuncios'>
         Últimos anuncios
