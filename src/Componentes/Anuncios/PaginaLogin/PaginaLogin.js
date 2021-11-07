@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import {login, loginTemporal} from './servicios'
+import '../../../styles/boostrap.css'
+import './PaginaLogin.css'
 
 function PaginaLogin({onLogin}){
     const [value, setValue] = useState({email:'', password:''});
@@ -51,27 +53,42 @@ function PaginaLogin({onLogin}){
     <div className='paginalogin'>
     <h1 className='paginalogin-titulo'> Accede a Nodepop</h1>
     <form onSubmit={controlarSubmit}>
+    <div className='item'>
     <label>Email</label>
         <input type='text' 
+        className="form-control"
         name='email' 
         label='Email'
         value={value.email}
         autoFocus
         onChange={eventoCambio}></input>
+        </div>
+
+        <div className='item'>
         <label>Password</label>
-        <input type='password' 
+        <input type='password'
+        className="form-control" 
         name='password'
         label = 'Password'
         value={value.password}
         onChange={eventoCambio}></input>
-        <label>Recuerdame</label>
+        </div>
+        
+        <div className='item'>
+        <label class="form-check-label">Recuerdame</label>
         <input type='checkbox'
+        id="flexCheckDefault"
+        className="form-check-input"
         name='checkbox'
         onChange={cambioCheckbox}></input>
+        </div>
 
+        <div className='item'>
         <button 
-        type='submit' 
+        type='submit'
+        className="btn btn-primary" 
         disabled={cargando || !value.email || !value.password}>Acceder</button>
+        </div>
     </form>
     {error && (
     <div onClick={resetearError}> 

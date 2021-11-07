@@ -5,6 +5,8 @@ import {traerAnuncio, borrarAd} from '../PaginaAnuncios/servicios'
 import logo from '../../../images/logo.png'
 import swal from 'sweetalert'
 import {useState, useEffect} from 'react';
+import './PaginaAnuncio.css'
+import '../../../styles/boostrap.css'
 
 function PaginaAnuncio({match}) {
     const [anuncio, setAnuncio] = useState([]);
@@ -39,15 +41,17 @@ function PaginaAnuncio({match}) {
 
     return (
         <Disenio>
-                <div> Anuncio </div>
-                <div key={anuncio.id}>
-                    <h2>{anuncio.name}</h2>
-                    <p>Precio: {anuncio.price}</p>
-                    <p> Tags: {anuncio.tags}</p>
-                    <p>{anuncio.sale ? 'En venta' : 'Se compra'}</p>
-                    {anuncio.photo ? <img src = {`http://localhost:3001${anuncio.photo}`} ></img> : <img src={logo}></img>}
-                    <button onClick={borrarAnuncio}>Borrar anuncio</button>
+            <div className="card mb-3">
+                <div className="card-header" key={anuncio.id}>
+                    <h2 className="card-header">{anuncio.name}</h2>
+                    <h4 className="card-subtitle text-muted">Precio: {anuncio.price}</h4>
+                    <h4 className="card-subtitle text-muted"> Tags: {anuncio.tags}</h4>
+                    <h4 className="card-subtitle text-muted">{anuncio.sale ? 'En venta' : 'Se compra'}</h4>
+                    {anuncio.photo ? <img src = {`http://localhost:3001${anuncio.photo}`} className="d-block user-select-none" ></img> : <img src={logo} className="d-block user-select-none"></img>}
+                    <button onClick={borrarAnuncio} className="btn btn-danger">Borrar anuncio</button>
                 </div>
+                
+            </div>
         </Disenio>
     )
     }

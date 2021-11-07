@@ -4,7 +4,6 @@ import './index.css';
 import App from './App';
 import storage from './utilidades/storage';
 import { autorizacionHeader } from './api/clientes';
-import './styles/boostrap.css'
 
 const accessToken = storage.get('auth');
 autorizacionHeader(accessToken);

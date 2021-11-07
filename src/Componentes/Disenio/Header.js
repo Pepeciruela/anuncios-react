@@ -12,9 +12,10 @@ function Header({className}){
         <header className={classNames('header', className)}>
         <div className='header-logo'>
         </div>
-        <nav className="navbar navbar-expand-lg navbar-light bg-light" id="navbarColor03">
+        <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <NavLink to='/adverts' className="navbar-brand">Inicio</NavLink>
             <NavLink to='/adverts/new' className="navbar-brand">Nuevo Anuncio</NavLink>
+            
             {estaRegistrado ? (
                 <button className="btn btn-danger" onClick={borrarRegistro}>
                     Log out

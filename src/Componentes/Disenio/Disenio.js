@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './Header';
 import '../../styles/boostrap.css'
+import './Disenio.css'
 
 function Disenio({children, title, ...props}){
     return (
@@ -10,7 +11,10 @@ function Disenio({children, title, ...props}){
             <h2>{title}</h2>
             <section>{children}</section>
         </main>
-        <footer>Nodepop 2021</footer>
+        <footer>
+            <hr className="my-4"/>
+            <p className='lead'>Nodepop 2021</p>
+        </footer>
 
         </div>
     );

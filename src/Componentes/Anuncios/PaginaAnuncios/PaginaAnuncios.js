@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import {traerAnuncios} from './servicios'
-import '../../../styles/boostrap.css';
 import Disenio from '../../Disenio/Disenio';
 import { Link } from 'react-router-dom';
+import '../../../styles/boostrap.css'
+import './PaginaAnuncios.css'
 
 const EstaVacio = () => (
   <div>
@@ -23,7 +24,6 @@ function PaginaAnuncios ({estaRegistrado, onLogout}){
   const [filtroVenta, setFiltroVenta] = useState('');
   const [filtroTags, setFiltroTags] = useState('');
   const [filtroPrecioMin, setFiltroPrecioMin] = useState('');
-
 
 
     const busquedaNombre = evento => {
@@ -93,28 +93,35 @@ function PaginaAnuncios ({estaRegistrado, onLogout}){
 
     
     return (
-      <Disenio title='Últimos anuncios' estaRegistrado = {estaRegistrado} onLogout={onLogout}>
-        <div className='filtrosBusqueda'>
-          <div className='filtroNombre'>
-            <label>Filtrar por nombre</label>
+      <Disenio estaRegistrado = {estaRegistrado} onLogout={onLogout}>
+        
+        <div className='filtro'>
+          <div>
+            <label className="col-form-label" for="inputDefault">Filtrar por nombre</label>
             <input type='text'
+            className="form-control"
             value = {filtroNombre} 
             onChange={busquedaNombre}></input>
           </div>
+          </div>
 
-          <div className='filtroPrecio'>
-            <label>Filtrar por precio</label>
+
+          <div className='filtro'>
             <div>
-            <label>Precio mínimo</label>
+            <label className="col-form-label" for="inputDefault">Filtrar por precio mínimo</label>
             <input type='number'
+            className="form-control"
             value = {filtroPrecioMin} 
             onChange={busquedaPrecioMin}></input>
           </div>
           </div>
 
-          <div className='filtrosVenta'>
+          
+          <div className='filtro'>
+          <label className="form-check-label">Filtrar por compra o venta</label>
           <div>
-            <input type="radio" 
+            <input type="radio"
+            className="form-check-input" 
             id="compra" 
             value="false" 
             name='drone'
@@ -122,7 +129,8 @@ function PaginaAnuncios ({estaRegistrado, onLogout}){
             <label for="compra">Compra</label>
           </div>
           <div>
-            <input type="radio" 
+            <input type="radio"
+            className="form-check-input"  
             id="venta"  
             name='drone' 
             value="true"
@@ -130,7 +138,8 @@ function PaginaAnuncios ({estaRegistrado, onLogout}){
             <label for="venta">Venta</label>
           </div>
           <div>
-            <input type="radio" 
+            <input type="radio"
+            className="form-check-input"  
             id="ambos" 
             name='drone' 
             value=""
@@ -138,9 +147,11 @@ function PaginaAnuncios ({estaRegistrado, onLogout}){
             <label for="compraVenta">Compra y venta</label>
           </div>
           </div>
-          <div className='filtrosVenta'>
-          <label>Tags</label>
-                <select multiple 
+
+          <div className='filtro'>
+          <label for="exampleSelect2">Filtrar por etiquetas</label>
+                <select multiple
+                class="form-select" 
                 name='tags' 
                 label='tags'
                 onChange={busquedaTags}>
@@ -152,27 +163,27 @@ function PaginaAnuncios ({estaRegistrado, onLogout}){
                 </select>
           </div>
 
-
-
-
-
-
-
-
-        </div>
-        <div className='paginaAnuncios'>
-        Últimos anuncios
+        <div className="jumbotron">
+        <h1 className="display-3">Últimos anuncios</h1>
         {anuncios.length ? (
-        <ul>
+        <ul className="list-group">
         {anuncios.map(anuncio =>
         <div key={anuncio.id}>
           <Link to={`/adverts/${anuncio.id}`}>
-            <h2>{anuncio.name}</h2>
+            <li className="list-group-item list-group-item-action active">
+              Nombre:
+              <span class="badge bg-primary badge-pill">{anuncio.name}</span></li>
           </Link>
-            <p>Precio: {anuncio.price}</p>
-            <p> Tags: {anuncio.tags.map(tag => 
-              <p>{tag}</p>)}</p>
-            <p>{anuncio.sale ? 'En venta' : 'Se compra'}</p>
+            <li className="list-group-item d-flex justify-content-between align-items-center">
+              Precio: 
+              <span className="badge bg-primary badge-pill">{anuncio.price}€</span></li>
+            <li className="list-group-item d-flex justify-content-between align-items-center">
+              Tags: {anuncio.tags.map(tag => 
+              <span className="badge bg-primary badge-pill">{tag}</span>)}</li>
+            <li className="list-group-item d-flex justify-content-between align-items-center">
+              Estado:
+              <span className="badge bg-primary badge-pill">{anuncio.sale ? 'En venta' : 'Se compra'}</span></li>
+        <br></br>
         </div>
         )}
     </ul>
