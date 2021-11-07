@@ -23,7 +23,7 @@ function PaginaAnuncios ({estaRegistrado, onLogout}){
   const [filtroVenta, setFiltroVenta] = useState('');
   const [filtroTags, setFiltroTags] = useState('');
   const [filtroPrecioMin, setFiltroPrecioMin] = useState('');
-  const [filtroPrecioMax, setFiltroPrecioMax] = useState('');
+
 
 
     const busquedaNombre = evento => {
@@ -47,21 +47,7 @@ function PaginaAnuncios ({estaRegistrado, onLogout}){
 
     const filtrarPorPrecioMin = (palabra) => {
       let resultadosBusqueda = tablaAnuncios.filter((elemento) => {
-        if(elemento.price >= palabra && elemento.price <= filtroPrecioMax != 0){
-          return elemento;
-        }
-      })
-    setAnuncios(resultadosBusqueda);
-    }
-
-    const busquedaPrecioMax = evento => {
-      setFiltroPrecioMax(evento.target.value);
-      filtrarPorPrecioMax(evento.target.value);
-    }
-
-    const filtrarPorPrecioMax = (palabra) => {
-      let resultadosBusqueda = tablaAnuncios.filter((elemento) => {
-        if(elemento.price <= palabra){
+        if(elemento.price >= palabra){
           return elemento;
         }
       })
@@ -124,14 +110,6 @@ function PaginaAnuncios ({estaRegistrado, onLogout}){
             value = {filtroPrecioMin} 
             onChange={busquedaPrecioMin}></input>
           </div>
-          <div>
-            <label>Precio máximo</label>
-            <input type='number'
-            value = {filtroPrecioMax} 
-            onChange={busquedaPrecioMax}></input>
-          </div>
-
-
           </div>
 
           <div className='filtrosVenta'>
