@@ -36,6 +36,7 @@ function PaginaAnuncio({match}) {
             })
         } catch(error){
             setError(error)
+            history.push('/404')
         }
     }
 

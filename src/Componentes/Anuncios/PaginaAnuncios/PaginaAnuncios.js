@@ -9,7 +9,7 @@ const EstaVacio = () => (
   <div>
     <p> No hay anuncios que mostrar. Crea tu el primero</p>
     <Link to='adverts/new'>
-    <button>
+    <button className="btn btn-primary">
       Nuevo anuncio
     </button>
     </Link>

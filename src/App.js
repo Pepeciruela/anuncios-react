@@ -8,6 +8,7 @@ import {logout} from './Componentes/Anuncios/PaginaLogin/servicios'
 import {ContextoRegistroProvider} from './Componentes/Anuncios/contexto'
 import RutaPrivada from './Componentes/Anuncios/RutaPrivada'
 import PaginaAnuncio from './Componentes/Anuncios/DetalleAnuncio/PaginaAnuncio';
+import NoPagina from './Componentes/Anuncios/404/404';
 
 function App({estaLogueadoInicio}) {
 
@@ -28,14 +29,12 @@ const borrarRegistro = () => {
         {estaRegistrado ? <Redirect to='/adverts'/>: <PaginaLogin onLogin={cambiarRegistro}/>}
         </Route>
         <RutaPrivada exact path='/adverts/new' component={NuevoAnuncio}/>
-        <RutaPrivada path='/adverts/:id' component={PaginaAnuncio}></RutaPrivada>
+        <RutaPrivada exact path='/adverts/:id' component={PaginaAnuncio}/>
         <RutaPrivada exact path='/adverts' component={PaginaAnuncios}/>
         <RutaPrivada exact path='/'>
           <Redirect to='/adverts'></Redirect>
         </RutaPrivada>
-        <Route path='/404'>
-          <div>404 Not found page</div>
-        </Route>
+        <Route path='/404'component={NoPagina}></Route>
         <Route>
           <Redirect to='/404'></Redirect>
         </Route>
