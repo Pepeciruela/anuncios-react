@@ -2,6 +2,8 @@ import { useContext } from 'react';
 import classNames from 'classnames'
 import ContextoRegistro from '../Anuncios/contexto';
 import {NavLink} from 'react-router-dom';
+import '../../styles/boostrap.css'
+import './Header.css'
 
 
 function Header({className}){
@@ -10,15 +12,15 @@ function Header({className}){
         <header className={classNames('header', className)}>
         <div className='header-logo'>
         </div>
-        <nav className='header-nav'>
-            <NavLink to='/adverts/new'>Nuevo Anuncio</NavLink>
-            <NavLink to='/adverts'>Inicio</NavLink>
+        <nav className="navbar navbar-expand-lg navbar-light bg-light" id="navbarColor03">
+            <NavLink to='/adverts' className="navbar-brand">Inicio</NavLink>
+            <NavLink to='/adverts/new' className="navbar-brand">Nuevo Anuncio</NavLink>
             {estaRegistrado ? (
-                <button className='header-button' onClick={borrarRegistro}>
+                <button className="btn btn-danger" onClick={borrarRegistro}>
                     Log out
                 </button>
             ) : (
-                <button className='header-button'>
+                <button className="btn btn-primary">
                     Log in
                 </button>
             )}

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import {traerAnuncios} from './servicios'
-import './PaginaAnuncios.css';
+import '../../../styles/boostrap.css';
 import Disenio from '../../Disenio/Disenio';
 import { Link } from 'react-router-dom';
 

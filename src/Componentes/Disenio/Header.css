@@ -1,0 +1,21 @@
+
+.navbar{
+    padding: 20px;
+    width: 100%;
+    height: 100%;
+    display: block;
+    
+}
+
+.navbar-brand:hover {
+    font-weight: bold;
+
+}
+
+.btn{
+    float: right;
+}
+
+.btn:hover{
+    transform: scale(1.2);
+}
